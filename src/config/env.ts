@@ -1,4 +1,4 @@
-import 'dotenfi/config';
+import 'dotenv/config';
 import * as joi from 'joi';
 
 interface EnvVars {
@@ -10,6 +10,7 @@ interface EnvVars {
   DB_PORT: number;
   PORT: number;
   NODE_ENV: string;
+  JWT_SECRET: string;
 }
 
 const envsSchema = joi
@@ -25,6 +26,7 @@ const envsSchema = joi
       .string()
       .valid('development', 'production', 'test')
       .default('development'),
+    JWT_SECRET: joi.string().required(),
   })
   .unknown(true);
 
@@ -45,4 +47,5 @@ export const envs = {
   dbPort: envVars.DB_PORT,
   port: envVars.PORT,
   nodeEnv: envVars.NODE_ENV,
+  jwtSecret: envVars.JWT_SECRET,
 };
